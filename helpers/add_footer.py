@@ -48,12 +48,12 @@ async def AddFooter(bot: Client, event: Message, text: str, user_id: int):
             await bot.leave_chat(chat_id=event.chat.id)
             await NotifyUser(
                 bot=bot,
-                text=f"Sorry, Unkil.\nGot 3 Minutes FloodWait from `{str(event.chat.id)}` !!\n\nSo I left that Channel.",
+                text=f"Sorry, User.\nGot 3 Minutes FloodWait from `{str(event.chat.id)}` !!\n\nSo I left that Channel.",
                 user_id=user_id
             )
             await NotifyUser(
                 bot=bot,
-                text=f"Hemlo, Unkil.\nGot 3 Minutes FloodWait from `{str(event.chat.id)}` !!\n\nSo I left that Channel.",
+                text=f"Hello, User.\nGot 3 Minutes FloodWait from `{str(event.chat.id)}` !!\n\nSo I left that Channel.",
                 user_id=Config.BOT_OWNER
             )
             return
