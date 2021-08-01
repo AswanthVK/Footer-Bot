@@ -22,7 +22,7 @@ async def NotifyUser(bot: Client, text: str, user_id: int):
         await bot.send_message(
             chat_id=user_id,
             text=text,
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Support Group", url="https://t.me/linux_repo")]])
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Support Group", url="https://t.me/NewBotzSupport")]])
         )
     except FloodWait as e:
         await asyncio.sleep(e.x)
