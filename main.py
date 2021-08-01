@@ -31,11 +31,11 @@ async def _start(bot: Client, m: Message):
     await AddUserToDatabase(bot, m)
     try:
         await m.reply_text(
-            Config.START_TEXT,
+            Config.START_TEXT.format(m.from_user.mention),
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton("Support Group", url="https://t.me/DevsZone"), InlineKeyboardButton("Bots Channel", url="https://t.me/Discovery_Updates")],
-                    [InlineKeyboardButton("Developer - @AbirHasan2005", url="https://t.me/AbirHasan2005")]
+                    [InlineKeyboardButton("Support Group", url="https://t.me/NewBotzSupport"), InlineKeyboardButton("Bots Channel", url="https://t.me/NewBotz")]
+                    #[InlineKeyboardButton("Developer - @AbirHasan2005", url="https://t.me/AbirHasan2005")]
                 ]
             ),
             quote=True
