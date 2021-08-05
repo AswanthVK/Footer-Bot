@@ -237,7 +237,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             text="Ok Unkil,\nNow Add me to Channel as Admin & Forward a Message From Channel.\n\nPress /cancel for Cancelling this process."
         )
         try:
-            event_: Message = await bot.listen(cb.message.chat.id, timeout=300)
+            #event_: Message = await bot.listen(cb.message.chat.id, timeout=300)
+            if event_.forward_from_chat and ((await db.is_user_exist(event_.forward_from_chat.id)) is False):
             if event_.forward_from_chat:
                 try:
                     _I, _err = await FetchMeOnChat(bot, chat_id=event_.forward_from_chat.id)
