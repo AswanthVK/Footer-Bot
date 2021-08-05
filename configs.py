@@ -12,6 +12,7 @@ class Config(object):
     UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", None)
     BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", False))
     BOT_OWNER = int(os.environ.get("BOT_OWNER", 1445283714))
+    BANNED_USERS = []
     MONGODB_URI = os.environ.get("MONGODB_URI", "")
     START_TEXT = """
 Hi, {}
