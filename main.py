@@ -68,6 +68,13 @@ async def _settings(bot: Client, event: Message):
 
 @AHBot.on_message(filters.channel & (filters.video | filters.document) & ~filters.edited & ~filters.private)
 async def add_footer(bot: Client, event: Message):
+    if event.from_user.id in Config.BANNED_CHANNELS:
+        await bot.delete_messages(
+            chat_id=event.chat.id,
+            message_ids=event.message_id,
+            revoke=True
+        )
+        return
     on_event = await db.find_user_id(event.chat.id)
     if on_event is None:
         return
@@ -90,13 +97,13 @@ async def add_text_footer(bot: Client, event: Message):
     #if int(event.chat.id) in Config.BANNED_CHANNELS:
         #await bot.leave_chat(event.chat.id)
         #return
-    #if event.from_user.id in Config.BANNED_USERS:
-        #await bot.delete_messages(
-            #chat_id=event.chat.id,
-            #message_ids=event.message_id,
-            #revoke=True
-        #)
-        #return
+    if event.from_user.id in Config.BANNED_CHANNELS:
+        await bot.delete_messages(
+            chat_id=event.chat.id,
+            message_ids=event.message_id,
+            revoke=True
+        )
+        return
     on_event = await db.find_user_id(event.chat.id)
     if on_event is None:
         return
@@ -117,6 +124,13 @@ async def add_text_footer(bot: Client, event: Message):
 
 @AHBot.on_message(filters.channel & filters.photo & ~filters.edited & ~filters.private)
 async def add_text_footer(bot: Client, event: Message):
+    if event.from_user.id in Config.BANNED_CHANNELS:
+        await bot.delete_messages(
+            chat_id=event.chat.id,
+            message_ids=event.message_id,
+            revoke=True
+        )
+        return
     on_event = await db.find_user_id(event.chat.id)
     if on_event is None:
         return
