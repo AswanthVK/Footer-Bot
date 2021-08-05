@@ -13,7 +13,7 @@ class Config(object):
     BROADCAST_AS_COPY = bool(os.environ.get("BROADCAST_AS_COPY", False))
     BOT_OWNER = int(os.environ.get("BOT_OWNER", 1445283714))
     BANNED_USERS = []
-    BANNED_CHANNELS = []
+    BANNED_CHANNELS = BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-1001362659779")).split()))
     MONGODB_URI = os.environ.get("MONGODB_URI", "")
     START_TEXT = """
 Hi, {}
