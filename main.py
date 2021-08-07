@@ -68,7 +68,7 @@ async def _settings(bot: Client, event: Message):
 
 @AHBot.on_message(filters.channel & (filters.video | filters.document) & ~filters.edited & ~filters.private)
 async def add_footer(bot: Client, event: Message):
-    if event.from_user.id in Config.BANNED_CHANNELS:
+    if event.chat.id in Config.BANNED_CHANNELS:
         await bot.delete_messages(
             chat_id=event.chat.id,
             message_ids=event.message_id,
@@ -94,10 +94,10 @@ async def add_footer(bot: Client, event: Message):
 
 @AHBot.on_message(filters.channel & filters.text & ~filters.edited & ~filters.private, group=-1)
 async def add_text_footer(bot: Client, event: Message):
-    #if int(event.chat.id) in Config.BANNED_CHANNELS:
-        #await bot.leave_chat(event.chat.id)
-        #return
-    if event.from_user.id in Config.BANNED_CHANNELS:
+    if int(event.chat.id) in Config.BANNED_CHANNELS:
+        await bot.leave_chat(event.chat.id)
+        return
+    if event.chat.id in Config.BANNED_CHANNELS:
         await bot.delete_messages(
             chat_id=event.chat.id,
             message_ids=event.message_id,
@@ -124,7 +124,7 @@ async def add_text_footer(bot: Client, event: Message):
 
 @AHBot.on_message(filters.channel & filters.photo & ~filters.edited & ~filters.private)
 async def add_text_footer(bot: Client, event: Message):
-    if event.from_user.id in Config.BANNED_CHANNELS:
+    if event.chat.id in Config.BANNED_CHANNELS:
         await bot.delete_messages(
             chat_id=event.chat.id,
             message_ids=event.message_id,
@@ -237,8 +237,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             text="Ok Unkil,\nNow Add me to Channel as Admin & Forward a Message From Channel.\n\nPress /cancel for Cancelling this process."
         )
         try:
-            event_: Message = await bot.listen(cb.message.chat.id, timeout=300)
-            #if event_.forward_from_chat and ((await db.is_user_exist(event_.forward_from_chat.id)) is False):
+            #event_: Message = await bot.listen(cb.message.chat.id, timeout=300)
+            if event_.forward_from_chat and ((await db.is_user_exist(event_.forward_from_chat.id)) is False):
             if event_.forward_from_chat:
                 try:
                     _I, _err = await FetchMeOnChat(bot, chat_id=event_.forward_from_chat.id)
